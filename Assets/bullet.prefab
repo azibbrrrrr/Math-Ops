@@ -195,3 +195,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 20
   destroyDelay: 2
+  Blood: {fileID: 1566762753859938526, guid: 761db59c064aa40488890a4a1ebfd37b, type: 3}
+  canvasTransform: {fileID: 0}

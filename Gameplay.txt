@@ -1,0 +1,8 @@
+1) Game starts
+2) spawn zombie
+3) after a few delay, generate questions and display 1st question (enable quizz canvas to true) 
+4) when question is displayed, game is paused and player has 30sec time limit to answer
+5) after player has click on the answer,
+quiz canvas is set to not active and there will be 2 actions:
+if correct, player will shoot zombies
+id wrong or time is out, zombie will continue approaching player 

@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public float bulletSpeed = 10f;
     public float destroyDelay = 2f; // Time until the bullet is destroyed.
-
+    public GameObject Blood;
     private Rigidbody2D rb;
 
     void Start()
@@ -28,7 +28,10 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("Collision with Zombie");
 
+            //Instantiate blood
+            GameObject blood = Instantiate(Blood, transform.position, Quaternion.identity, GameObject.FindWithTag("Game").transform) as GameObject;
             // Destroy the enemy (zombie) GameObject on collision.
+            // blood.transform.parent = ;
             Destroy(collision.gameObject);
 
             // Destroy the bullet on collision.

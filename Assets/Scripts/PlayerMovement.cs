@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Instantiate a new bullet at the gun's position.
-        GameObject newBullet = Instantiate(bulletPrefab, gunTransform.position, Quaternion.identity);
+        GameObject newBullet = Instantiate(bulletPrefab, gunTransform.position, Quaternion.identity, GetComponent<Transform>());
 
         // Set isShooting to true to prevent further shooting until the muzzle flash is gone.
         isShooting = true;

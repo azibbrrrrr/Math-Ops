@@ -8,7 +8,7 @@ public class ZombieSpawner : MonoBehaviour
     public Transform destination; // The position where zombies will end up.
     // public float minSpawnInterval = 3f; // Minimum time between zombie spawns in seconds.
     // public float maxSpawnInterval = 5f; // Maximum time between zombie spawns in seconds.
-    public float moveSpeed = 2f; // Speed at which zombies move.
+    public float moveSpeed = 1.5f; // Speed at which zombies move.
     public QuizManager quizManager;
     public int numberOfZombies;
 

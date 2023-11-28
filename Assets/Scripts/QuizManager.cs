@@ -123,12 +123,12 @@ public class QuizManager : MonoBehaviour
         while (timer > 0f && _answeringQuestion)
         {
             // Update UI or do other things related to the timer (if needed)
+            yield return null;
             string timerFormatted = FormatTimer(timer);
             timeLimitTxt.text = timerFormatted;
 
             timeRemaining = timer;
 
-            yield return null;
             timer -= Time.unscaledDeltaTime;
 
             // Ensure the timer doesn't go below 0

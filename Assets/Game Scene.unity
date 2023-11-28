@@ -972,7 +972,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -856, y: 0}
+  m_AnchoredPosition: {x: -855.9999, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &331781636
@@ -2616,6 +2616,7 @@ GameObject:
   - component: {fileID: 1124154611}
   - component: {fileID: 1124154610}
   - component: {fileID: 1124154612}
+  - component: {fileID: 1124154613}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2664,7 +2665,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ac591ffa6db7b4e4ba584ffabcb81a70, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2805,6 +2806,22 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4780188716486615064, guid: 76b188cc182837746ab558ed08b1fe78, type: 3}
   gunTransform: {fileID: 1759585761}
   muzzleFlash: {fileID: 737228400}
+--- !u!114 &1124154613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124154606}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &1186798265
 GameObject:
   m_ObjectHideFlags: 0

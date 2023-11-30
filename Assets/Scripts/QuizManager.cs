@@ -22,21 +22,36 @@ public class QuizManager : MonoBehaviour
     public Text scoreTxt;
     public Text PlayerPoints;
     public int score; //player's score
+    private int streakCounter = 0;
+    private int streakThreshold = 3;
     public GameObject gameScore;
     public GameObject quizCanvas;
     public float questionTimeLimit = 30f; // Time limit for answering each question
     public float timeRemaining; // Remaining time for the current question
-
+    public GameObject player;
+    private Material playerMaterial;
 
     private void Start()
     {
         gameScore.SetActive(false);
         quizCanvas.SetActive(false);
+        playerMaterial = player.GetComponent<Renderer>().material;
+        ResetPlayerShader();
         QnA = new List<QuestionAndAnswers>(); // Initialize the QnA list
         for (int i = 0; i < TotalQuestions; i++)
         {
             QnA.Add(MathQuizGenerator.CreateMathQuestion());
         }
+    }
+
+    private void ResetPlayerShader()
+    {
+        playerMaterial.DisableKeyword("OUTBASE_ON");
+    }
+
+    private void SetPlayerOnStreakFire()
+    {
+        playerMaterial.EnableKeyword("OUTBASE_ON");
     }
 
     private void Update()
@@ -186,6 +201,43 @@ public class QuizManager : MonoBehaviour
             Console.WriteLine(); // Empty line for separation
         }
 
+    }
+
+    public void AnswerCorrect()
+    {
+
+        IncreaseScore();
+        streakCounter++;
+        if (streakCounter >= streakThreshold)
+        {
+            SetPlayerOnStreakFire();
+        }
+        // Shoot zombie
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        playerMovement.Attack();
+    }
+
+    // Call this method when the player answers incorrectly
+    public void AnswerIncorrect()
+    {
+        streakCounter = 0;
+        ResetPlayerShader();
+    }
+
+    private void IncreaseScore()
+    {
+        // Calculate the time bonus multiplier
+        float timeBonusMultiplier = 1 + TimePercentage();
+        // Update the player's score with the time bonus
+        int timeBonusScore = Mathf.RoundToInt(100 * timeBonusMultiplier);
+        int questionScore = timeBonusScore + (streakCounter * 20);
+        score += questionScore;
+    }
+
+    private float TimePercentage()
+    {
+        // Calculate the percentage of time remaining
+        return timeRemaining / questionTimeLimit;
     }
 
     public bool QuestionsAvailable

@@ -16,7 +16,6 @@ public class QuizManager : MonoBehaviour
     public int currentQuestion;
     public int questionNo;
     public Text queNo;
-
     public TMP_Text QuestionTxt;
     public Text timeLimitTxt;
     public Text scoreTxt;
@@ -24,6 +23,7 @@ public class QuizManager : MonoBehaviour
     public int score; //player's score
     private int streakCounter = 0;
     private int streakThreshold = 3;
+    public Text streakNo;
     public GameObject gameScore;
     public GameObject quizCanvas;
     public float questionTimeLimit = 30f; // Time limit for answering each question
@@ -33,7 +33,7 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
-        gameScore.SetActive(false);
+        // gameScore.SetActive(false);
         quizCanvas.SetActive(false);
         playerMaterial = player.GetComponent<Renderer>().material;
         ResetPlayerShader();
@@ -208,6 +208,7 @@ public class QuizManager : MonoBehaviour
 
         IncreaseScore();
         streakCounter++;
+        streakNo.text = streakCounter.ToString();
         if (streakCounter >= streakThreshold)
         {
             SetPlayerOnStreakFire();
@@ -221,6 +222,7 @@ public class QuizManager : MonoBehaviour
     public void AnswerIncorrect()
     {
         streakCounter = 0;
+        streakNo.text = streakCounter.ToString();
         ResetPlayerShader();
     }
 

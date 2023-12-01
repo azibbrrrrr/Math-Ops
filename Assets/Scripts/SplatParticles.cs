@@ -16,7 +16,7 @@ public class SplatParticles : MonoBehaviour
         int count = collisionEvents.Count;
         for (int i = 0; i < count; i++)
         {
-            GameObject splat = Instantiate(splatprefab, collisionEvents[i].intersection, Quaternion.identity) as GameObject;
+            GameObject splat = Instantiate(splatprefab, collisionEvents[i].intersection, Quaternion.identity, GameObject.FindWithTag("Game").transform) as GameObject;
             // splat.transform.SetParent(splatHolder, true);
             Splat splatScript = splat.GetComponent<Splat>();
             splatScript.Initialize(Splat.SplatLocation.Foreground);

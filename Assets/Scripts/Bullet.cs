@@ -17,22 +17,36 @@ public class Bullet : MonoBehaviour
         // Set the initial velocity of the bullet.
         rb.velocity = transform.right * bulletSpeed;
 
-        // print("bullet instantiated");
         // Destroy the bullet after a delay.
         Destroy(gameObject, destroyDelay);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        GameObject GameElement = GameObject.FindWithTag("Game");
         if (collision.gameObject.CompareTag("Zombie"))
         {
             Debug.Log("Collision with Zombie");
 
             //Instantiate blood
-            GameObject blood = Instantiate(Blood, transform.position, Quaternion.identity, GameObject.FindWithTag("Game").transform) as GameObject;
-            // Destroy the enemy (zombie) GameObject on collision.
-            // blood.transform.parent = ;
-            Destroy(collision.gameObject);
+            GameObject blood = Instantiate(Blood, transform.position, Quaternion.identity, GameElement.transform) as GameObject;
+            // Play the particle system
+            var bloodParticleSystem = blood.GetComponent<ParticleSystem>();
+            if (bloodParticleSystem != null)
+            {
+                bloodParticleSystem.Play();
+            }
+
+            // Stop zombie movement
+            ZombieSpawner zombieSpawner = GameElement.GetComponent<ZombieSpawner>();
+
+            // Pass the specific zombie GameObject to HitByBullet
+            zombieSpawner.HitByBullet(collision.gameObject);
+
+
+            // Zombie dead on collision.
+            Animator ZombAnimator = collision.gameObject.GetComponent<Animator>();
+            ZombAnimator.SetTrigger("ZombieDead");
 
             // Destroy the bullet on collision.
             Destroy(gameObject);

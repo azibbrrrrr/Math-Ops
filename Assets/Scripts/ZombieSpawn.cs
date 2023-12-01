@@ -1,16 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
+
 
 public class ZombieSpawner : MonoBehaviour
 {
     public GameObject zombiePrefab; // Reference to your zombie prefab.
     public Transform teleportDoor; // The teleport door's position.
     public Transform destination; // The position where zombies will end up.
-    // public float minSpawnInterval = 3f; // Minimum time between zombie spawns in seconds.
-    // public float maxSpawnInterval = 5f; // Maximum time between zombie spawns in seconds.
     public float moveSpeed = 1.5f; // Speed at which zombies move.
     public QuizManager quizManager;
     public int numberOfZombies;
+
+    private Dictionary<GameObject, ZombieData> zombieDataMap = new Dictionary<GameObject, ZombieData>();
+    private Queue<GameObject> spawnedZombies = new Queue<GameObject>();
 
     private Coroutine zombieSpawningCoroutine;
 
@@ -31,19 +34,22 @@ public class ZombieSpawner : MonoBehaviour
     {
         while (quizManager.QuestionsAvailable)
         {
-            SpawnZombie();
-
-            // Wait for 3 seconds before enabling the quiz canvas again.
-            yield return new WaitForSeconds(3f);
-
-            // Check if the game is still answering a question before generating the next question.
-            while (quizManager.AnsweringQuestion)
+            if (spawnedZombies.Count < 2)
             {
-                yield return null;
-            }
+                SpawnZombie();
 
-            // Generate the next question.
-            quizManager.generateQuestion();
+                // Wait for 3 seconds before enabling the quiz canvas again.
+                yield return new WaitForSeconds(3f);
+
+                // Check if the game is still answering a question before generating the next question.
+                while (quizManager.AnsweringQuestion)
+                {
+                    yield return null;
+                }
+
+                // Generate the next question.
+                quizManager.generateQuestion();
+            }
         }
 
         // The game is over, handle this as needed.
@@ -52,29 +58,72 @@ public class ZombieSpawner : MonoBehaviour
     private void SpawnZombie()
     {
         // Instantiate a zombie as a child of the canvas.
-        GameObject zombie = Instantiate(zombiePrefab, GetComponent<Transform>());
+        GameObject zombieObject = Instantiate(zombiePrefab, GetComponent<Transform>());
+
         // Set the zombie's initial position to the teleport door's position.
-        zombie.transform.position = teleportDoor.position;
+        zombieObject.transform.position = teleportDoor.position;
+
+        // Generate a random speed for the zombie.
+        float speed = Random.Range(moveSpeed * 0.5f, moveSpeed * 1.5f);
+
+        // Create ZombieData to store zombie-specific data
+        ZombieData zombieData = new ZombieData(zombieObject, speed);
+
+        // Add zombie and its corresponding ZombieData to the dictionary
+        zombieDataMap.Add(zombieObject, zombieData);
+
+        // Add the spawned zombie to the queue
+        spawnedZombies.Enqueue(zombieObject);
 
         // Move the zombie from the teleport door to the destination.
-        StartCoroutine(MoveZombie(zombie));
+        StartCoroutine(MoveZombie(zombieData));
     }
 
-    private IEnumerator MoveZombie(GameObject zombie)
+    public void HitByBullet(GameObject zombieObject)
+    {
+        if (zombieDataMap.TryGetValue(zombieObject, out var zombieData))
+        {
+            zombieData.IsHit = true;
+            Debug.Log("Zombie get hit");
+        }
+
+        // Remove the destroyed zombie from the queue
+        if (spawnedZombies.Count > 0)
+        {
+            spawnedZombies.Dequeue();
+        }
+    }
+
+    private IEnumerator MoveZombie(ZombieData zombieData)
     {
         Vector3 targetPosition = destination.position;
 
-        while (Vector3.Distance(zombie.transform.position, targetPosition) > 0.1f)
+        while (!zombieData.IsHit && Vector3.Distance(zombieData.Zombie.transform.position, targetPosition) > 0.1f)
         {
-            // Move the zombie toward the destination.
-            zombie.transform.position = Vector3.MoveTowards(zombie.transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            yield return null;
+            zombieData.Zombie.transform.position = Vector3.MoveTowards(zombieData.Zombie.transform.position, targetPosition, zombieData.Speed * Time.deltaTime);
+            yield return null; // important to yield control back to Unity
         }
 
-        // Ensure the zombie is precisely at the destination.
-        zombie.transform.position = targetPosition;
+        // Destroy the zombie only if it hasn't been hit.
+        if (!zombieData.IsHit)
+        {
+            Destroy(zombieData.Zombie);
+            Debug.Log("Zombie Destroyed");
+        }
+    }
 
-        // Destroy the zombie when it reaches the destination or based on certain conditions.
-        Destroy(zombie);
+    // Class to store zombie-specific data
+    public class ZombieData
+    {
+        public GameObject Zombie { get; }
+        public float Speed { get; }
+        public bool IsHit { get; set; }
+
+        public ZombieData(GameObject zombie, float speed)
+        {
+            Zombie = zombie;
+            Speed = speed;
+            IsHit = false;
+        }
     }
 }

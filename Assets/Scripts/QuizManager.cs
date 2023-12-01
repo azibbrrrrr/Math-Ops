@@ -20,6 +20,9 @@ public class QuizManager : MonoBehaviour
     public Text timeLimitTxt;
     public Text scoreTxt;
     public Text PlayerPoints;
+    public Text points_gain;
+    public Text streak_bonus;
+    public GameObject pointsGain;
     public int score; //player's score
     private int streakCounter = 0;
     private int streakThreshold = 3;
@@ -149,9 +152,6 @@ public class QuizManager : MonoBehaviour
             // Ensure the timer doesn't go below 0
             timer = Mathf.Max(timer, 0f);
         }
-
-        // Time's up, handle it as a wrong answer
-        Debug.Log("Time's up!");
     }
 
     private string FormatTimer(float timeInSeconds)
@@ -206,7 +206,6 @@ public class QuizManager : MonoBehaviour
     public void AnswerCorrect()
     {
 
-        IncreaseScore();
         streakCounter++;
         streakNo.text = streakCounter.ToString();
         if (streakCounter >= streakThreshold)
@@ -216,6 +215,7 @@ public class QuizManager : MonoBehaviour
         // Shoot zombie
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
         playerMovement.Attack();
+        IncreaseScore();
     }
 
     // Call this method when the player answers incorrectly
@@ -228,13 +228,26 @@ public class QuizManager : MonoBehaviour
 
     private void IncreaseScore()
     {
-        // Calculate the time bonus multiplier
         float timeBonusMultiplier = 1 + TimePercentage();
-        // Update the player's score with the time bonus
         int timeBonusScore = Mathf.RoundToInt(100 * timeBonusMultiplier);
-        int questionScore = timeBonusScore + (streakCounter * 20);
+
+        points_gain.text = $"+{timeBonusScore} XP";
+
+        int questionScore = CalculateQuestionScore(timeBonusScore);
+
+        pointsGain.GetComponent<points_gain>().Triggeranimator();
+
         score += questionScore;
     }
+
+    private int CalculateQuestionScore(int timeBonusScore)
+    {
+        int streakBonus = (streakCounter >= streakThreshold) ? streakCounter * 20 : 0;
+        streak_bonus.text = (streakBonus > 0) ? $"+{streakBonus} XP" : " ";
+
+        return timeBonusScore + streakBonus;
+    }
+
 
     private float TimePercentage()
     {

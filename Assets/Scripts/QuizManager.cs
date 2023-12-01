@@ -33,6 +33,7 @@ public class QuizManager : MonoBehaviour
     public float timeRemaining; // Remaining time for the current question
     public GameObject player;
     private Material playerMaterial;
+    private int Correct;
 
     private void Start()
     {
@@ -60,23 +61,20 @@ public class QuizManager : MonoBehaviour
     private void Update()
     {
         PlayerPoints.text = score.ToString();
-        if (QnA.Count <= 0)
-        {
-            QuestionTxt.text = "Quiz Completed!";
-            _questionsAvailable = false;
-            GameOver();
-        }
     }
 
-    void GameOver()
+    public void GameOver()
     {
-        scoreTxt.text = score + "/" + TotalQuestions;
+        scoreTxt.text = Correct.ToString() + "/" + TotalQuestions;
+        Debug.Log("GameOver");
         gameScore.SetActive(true);
+        PauseGame();
     }
 
     public void retry()
     {
         gameScore.SetActive(false);
+        ResumeGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -123,14 +121,13 @@ public class QuizManager : MonoBehaviour
             // Start the timer for answering the question
             StartCoroutine(AnswerTimer());
             PauseGame();
+            // false when there is no more question left; 
+            _questionsAvailable = QnA.Count != 1;
         }
         else
         {
-            // No more questions, handle end of the quiz
-            QuestionTxt.text = "Quiz Completed!";
             _questionsAvailable = false;
             GameOver();
-            // You can add additional logic here to handle the end of the quiz.
         }
     }
 
@@ -205,7 +202,7 @@ public class QuizManager : MonoBehaviour
 
     public void AnswerCorrect()
     {
-
+        Correct++;
         streakCounter++;
         streakNo.text = streakCounter.ToString();
         if (streakCounter >= streakThreshold)
@@ -265,6 +262,12 @@ public class QuizManager : MonoBehaviour
     {
         get { return _answeringQuestion; }
         set { _answeringQuestion = value; }
+    }
+
+    public int Score
+    {
+        get { return score; }
+        set { score = value; }
     }
 
 }

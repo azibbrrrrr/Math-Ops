@@ -1068,7 +1068,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -855.9999, y: 0}
+  m_AnchoredPosition: {x: -856, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &331781636
@@ -1943,7 +1943,6 @@ RectTransform:
   - {fileID: 12989604}
   - {fileID: 580137432}
   - {fileID: 1201726729}
-  - {fileID: 1728014223}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2470,7 +2469,7 @@ RectTransform:
   m_GameObject: {fileID: 771255194}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -459.56012}
-  m_LocalScale: {x: 16.9, y: 16.9, z: 16.9}
+  m_LocalScale: {x: 0.79716986, y: 0.79716986, z: 0.79716986}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 252956379}
@@ -2478,10 +2477,10 @@ RectTransform:
   m_Father: {fileID: 1486761466}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260.2, y: 39.492012}
-  m_SizeDelta: {x: 6.6417627, y: 1.8587968}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -260.20065, y: 219.49207}
+  m_SizeDelta: {x: 6.6417627, y: 1.8587952}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &771255196
 MonoBehaviour:
@@ -3482,6 +3481,7 @@ RectTransform:
   m_Children:
   - {fileID: 737228403}
   - {fileID: 1759585761}
+  - {fileID: 1312543538}
   m_Father: {fileID: 1486761466}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3939,12 +3939,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312543537}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -351.8, y: -6, z: -1.8600463}
-  m_LocalScale: {x: 4.53, y: 4.53, z: 4.53}
+  m_LocalPosition: {x: -5.320757, y: 2.3399982, z: 27.78963}
+  m_LocalScale: {x: 0.21367924, y: 0.21367924, z: 0.21367924}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 759484725}
-  m_Father: {fileID: 1486761466}
+  m_Father: {fileID: 1124154609}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1312543539
@@ -4669,15 +4669,15 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 771255195}
   - {fileID: 1124154609}
+  - {fileID: 771255195}
   - {fileID: 7733125286517557114}
   - {fileID: 27123125}
   - {fileID: 331781635}
   - {fileID: 288060106}
   - {fileID: 1457309877}
-  - {fileID: 1312543538}
   - {fileID: 1541785659}
+  - {fileID: 1728014223}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4704,6 +4704,9 @@ MonoBehaviour:
   moveSpeed: 1
   quizManager: {fileID: 1390268374}
   numberOfZombies: 10
+  scoreTxt: {fileID: 0}
+  gameScore: {fileID: 0}
+  zombieSpawnAOT: 1
 --- !u!1 &1541785658
 GameObject:
   m_ObjectHideFlags: 0
@@ -5007,19 +5010,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728014222}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 575118055}
   - {fileID: 792007116}
-  m_Father: {fileID: 580958820}
+  m_Father: {fileID: 1486761466}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 57}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1759585760
@@ -5576,7 +5579,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -3.2, y: -102.600006}
+  m_AnchoredPosition: {x: -3.2, y: -102.599976}
   m_SizeDelta: {x: 494.41, y: 68.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2093192402
@@ -5788,6 +5791,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4409885138290325966, guid: 960ed04cb8ab21c49aee6261356841d2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b4e6c47884ef61b40bac9792620b56c9, type: 2}
     - target: {fileID: 5764839305476021073, guid: 960ed04cb8ab21c49aee6261356841d2, type: 3}
       propertyPath: m_Name
       value: Zombie
@@ -5795,14 +5802,6 @@ PrefabInstance:
     - target: {fileID: 5764839305476021073, guid: 960ed04cb8ab21c49aee6261356841d2, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5764839305476021073, guid: 960ed04cb8ab21c49aee6261356841d2, type: 3}
-      propertyPath: m_TagString
-      value: Zombie
-      objectReference: {fileID: 0}
-    - target: {fileID: 8109698717124167703, guid: 960ed04cb8ab21c49aee6261356841d2, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

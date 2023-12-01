@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8109698717124167703}
   - component: {fileID: 1022402128800977690}
   - component: {fileID: 376098809387762529}
-  - component: {fileID: 6586303561279413650}
+  - component: {fileID: 3759486698645949168}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Zombie
@@ -61,7 +61,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d35846f8bf6b69044bd3a6cabb0f1165, type: 2}
+  - {fileID: 2100000, guid: b4e6c47884ef61b40bac9792620b56c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -186,7 +186,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5593455, y: 4.7443643}
   m_EdgeRadius: 0
---- !u!114 &6586303561279413650
+--- !u!114 &3759486698645949168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

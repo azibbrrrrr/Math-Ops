@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 public class ZombieSpawner : MonoBehaviour
@@ -16,6 +17,10 @@ public class ZombieSpawner : MonoBehaviour
     private Queue<GameObject> spawnedZombies = new Queue<GameObject>();
 
     private Coroutine zombieSpawningCoroutine;
+    public Text scoreTxt;
+    public GameObject gameScore;
+    public int zombieSpawnAOT = 2;
+
 
     private void Start()
     {
@@ -34,25 +39,36 @@ public class ZombieSpawner : MonoBehaviour
     {
         while (quizManager.QuestionsAvailable)
         {
-            if (spawnedZombies.Count < 2)
+            if (spawnedZombies.Count < zombieSpawnAOT)
             {
                 SpawnZombie();
-
                 // Wait for 3 seconds before enabling the quiz canvas again.
                 yield return new WaitForSeconds(3f);
+            }
 
-                // Check if the game is still answering a question before generating the next question.
-                while (quizManager.AnsweringQuestion)
-                {
-                    yield return null;
-                }
+            // Check if the game is still answering a question before generating the next question.
+            while (quizManager.AnsweringQuestion)
+            {
+                yield return null;
+            }
 
-                // Generate the next question.
-                quizManager.generateQuestion();
+            // Generate question
+            quizManager.generateQuestion();
+
+            // Wait for 3 seconds after generating the question.
+            yield return new WaitForSeconds(2f);
+
+            // Check if there are no more available questions, and if so, trigger game over.
+            if (!quizManager.QuestionsAvailable)
+            {
+                StopSpawningZombies();
+                quizManager.GameOver();
+                yield break; // Exit the coroutine since the game is over.
             }
         }
 
         // The game is over, handle this as needed.
+        StopSpawningZombies();
     }
 
     private void SpawnZombie()
@@ -64,7 +80,7 @@ public class ZombieSpawner : MonoBehaviour
         zombieObject.transform.position = teleportDoor.position;
 
         // Generate a random speed for the zombie.
-        float speed = Random.Range(moveSpeed * 0.5f, moveSpeed * 1.5f);
+        float speed = Random.Range(moveSpeed * 0.5f, moveSpeed);
 
         // Create ZombieData to store zombie-specific data
         ZombieData zombieData = new ZombieData(zombieObject, speed);
@@ -78,6 +94,16 @@ public class ZombieSpawner : MonoBehaviour
         // Move the zombie from the teleport door to the destination.
         StartCoroutine(MoveZombie(zombieData));
     }
+
+    private void StopSpawningZombies()
+    {
+        if (zombieSpawningCoroutine != null)
+        {
+            StopCoroutine(zombieSpawningCoroutine);
+            zombieSpawningCoroutine = null;
+        }
+    }
+
 
     public void HitByBullet(GameObject zombieObject)
     {

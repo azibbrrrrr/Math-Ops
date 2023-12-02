@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject muzzleFlash;
 
     private bool isShooting = false;
+    [SerializeField] private AudioSource shootingSFX;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         anim.SetTrigger("attack");
+        shootingSFX.Play();
         // Activate the muzzle flash.
         if (muzzleFlash != null)
         {

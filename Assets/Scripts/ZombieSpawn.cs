@@ -20,7 +20,9 @@ public class ZombieSpawner : MonoBehaviour
     public Text scoreTxt;
     public GameObject gameScore;
     public int zombieSpawnAOT = 2;
-
+    [SerializeField] private AudioSource ZombAttackSFX;
+    [SerializeField] private AudioSource ZombHurtSFX;
+    [SerializeField] private AudioSource BloodSFX;
 
     private void Start()
     {
@@ -41,6 +43,7 @@ public class ZombieSpawner : MonoBehaviour
         {
             if (spawnedZombies.Count < zombieSpawnAOT)
             {
+                ZombAttackSFX.Play();
                 SpawnZombie();
                 // Wait for 3 seconds before enabling the quiz canvas again.
                 yield return new WaitForSeconds(3f);
@@ -107,6 +110,8 @@ public class ZombieSpawner : MonoBehaviour
 
     public void HitByBullet(GameObject zombieObject)
     {
+        ZombHurtSFX.Play();
+        BloodSFX.Play();
         if (zombieDataMap.TryGetValue(zombieObject, out var zombieData))
         {
             zombieData.IsHit = true;

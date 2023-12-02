@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public float destroyDelay = 2f; // Time until the bullet is destroyed.
     public GameObject Blood;
     private Rigidbody2D rb;
+    [SerializeField] private AudioSource bloodSFX;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class Bullet : MonoBehaviour
             //Instantiate blood
             GameObject blood = Instantiate(Blood, transform.position, Quaternion.identity, GameElement.transform) as GameObject;
             // Play the particle system
+            // bloodSFX.Play();
             var bloodParticleSystem = blood.GetComponent<ParticleSystem>();
             if (bloodParticleSystem != null)
             {

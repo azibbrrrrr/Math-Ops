@@ -37,6 +37,7 @@ public class MathQuizGenerator : MonoBehaviour
         qa.Question = $"{num1} {operatorChar} {num2} = ?";
         qa.Answers = new string[4];
 
+        // Note: The CorrectAnswer property is 1-based (starts from 1)
         int correctAnswer = UnityEngine.Random.Range(1, 5); // 1, 2, 3, or 4
         qa.CorrectAnswer = correctAnswer;
 
@@ -44,10 +45,12 @@ public class MathQuizGenerator : MonoBehaviour
         {
             if (i == correctAnswer)
             {
+                // Store the correct answer at the (i - 1) index in the array
                 qa.Answers[i - 1] = CalculateAnswer(num1, num2, operatorChar).ToString();
             }
             else
             {
+                // Store wrong answers at their respective indices in the array
                 qa.Answers[i - 1] = GenerateWrongAnswer(num1, num2, operatorChar).ToString();
             }
         }

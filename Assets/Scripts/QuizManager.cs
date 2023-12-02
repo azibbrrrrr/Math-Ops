@@ -87,20 +87,25 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    // set asnwers for each button
+    // Function to set up answer options for the current question
     void SetAnswers()
     {
         for (int i = 0; i < options.Length; i++)
         {
+            // Reset the isCorrect property to false for each option
             options[i].GetComponent<AnswerScript>().isCorrect = false;
+
+            // Set the text of the UI element to display the answer text
             options[i].transform.GetChild(0).GetComponent<Text>().text = QnA[currentQuestion].Answers[i];
 
+            // Check if the current option is the correct answer
+            // Note: The CorrectAnswer property is 1-based (starts from 1), so we use i + 1 to match the index.
             if (QnA[currentQuestion].CorrectAnswer == i + 1)
             {
+                // Mark the isCorrect property as true for the correct answer
                 options[i].GetComponent<AnswerScript>().isCorrect = true;
             }
         }
-
     }
 
     // get a question from a list of all questions

@@ -167,14 +167,14 @@ public class QuizManager : MonoBehaviour
         return formattedTime;
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         // Pause the game by setting Time.timeScale to 0.
         Time.timeScale = 0f;
         _answeringQuestion = true;
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
         // Resume the game by setting Time.timeScale back to 1.
         Time.timeScale = 1f;

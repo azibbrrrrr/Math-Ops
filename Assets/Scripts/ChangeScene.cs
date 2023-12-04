@@ -1,13 +1,25 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class startgame : MonoBehaviour
+public class StartGame : MonoBehaviour
 {
-    public void changeScene(String scene)
+    public Image image;
+
+    public void ChangeScene(string scene)
     {
+        StartCoroutine(FadeOut(scene));
+        Debug.Log("fadeout");
+    }
+
+    private IEnumerator FadeOut(string scene)
+    {
+        image.GetComponent<Animator>().SetTrigger("fade_out");
+
+        yield return new WaitForSeconds(1f);
+
         SceneManager.LoadScene(scene);
     }
 }

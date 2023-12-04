@@ -111,7 +111,7 @@ public class ZombieSpawner : MonoBehaviour
     public void HitByBullet(GameObject zombieObject)
     {
         ZombHurtSFX.Play();
-        BloodSFX.Play();
+        // BloodSFX.Play();
         if (zombieDataMap.TryGetValue(zombieObject, out var zombieData))
         {
             zombieData.IsHit = true;

@@ -32,8 +32,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 57, y: -57}
@@ -227,13 +227,13 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 4
+      minMaxState: 0
       minColor: {r: 0.9529412, g: 0.18431373, b: 0.8478543, a: 1}
-      maxColor: {r: 0.86231256, g: 0.90588236, b: 0.06274509, a: 1}
+      maxColor: {r: 1, g: 0.0037735105, b: 0.16785775, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0.26790315, b: 0.069811285, a: 1}
-        key1: {r: 0.9995657, g: 1, b: 0, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0.98823535, g: 0.63529414, b: 0.33333334, a: 1}
         key3: {r: 0.8431373, g: 0.34509805, b: 0.73333335, a: 1}
         key4: {r: 0, g: 0.8439965, b: 1, a: 0}
@@ -241,7 +241,7 @@ ParticleSystem:
         key6: {r: 0.029435396, g: 1, b: 0, a: 0}
         key7: {r: 1, g: 1, b: 1, a: 0}
         ctime0: 0
-        ctime1: 9830
+        ctime1: 65535
         ctime2: 17540
         ctime3: 26792
         ctime4: 40285
@@ -249,17 +249,17 @@ ParticleSystem:
         ctime6: 58018
         ctime7: 65535
         atime0: 0
-        atime1: 24094
+        atime1: 65535
         atime2: 62066
         atime3: 65535
         atime4: 0
         atime5: 0
         atime6: 0
         atime7: 0
-        m_Mode: 1
+        m_Mode: 0
         m_ColorSpace: 0
-        m_NumColorKeys: 8
-        m_NumAlphaKeys: 4
+        m_NumColorKeys: 2
+        m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
         key0: {r: 0.990566, g: 0.04111779, b: 0.5589103, a: 1}
@@ -293,8 +293,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.2
+      scalar: 0.2
+      minScalar: 0.15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -986,7 +986,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 15
+        scalar: 50
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4841,7 +4841,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bc77aff997e7d9049b3b1041336aef54, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -9,7 +9,7 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject zombiePrefab; // Reference to your zombie prefab.
     public Transform teleportDoor; // The teleport door's position.
     public Transform destination; // The position where zombies will end up.
-    public float moveSpeed = 1.5f; // Speed at which zombies move.
+    public float moveSpeed = 0.5f; // Speed at which zombies move.
     public QuizManager quizManager;
     public int numberOfZombies;
 
@@ -24,7 +24,7 @@ public class ZombieSpawner : MonoBehaviour
     [SerializeField] private AudioSource ZombHurtSFX;
     [SerializeField] private AudioSource BloodSFX;
 
-    private void Start()
+    public void StartGame()
     {
         StartSpawningZombies();
     }
